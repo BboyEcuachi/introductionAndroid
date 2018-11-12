@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="app_name"> Travail Pratique Nº1 </string>
+
+    <!-- Variables -->
+    <string name="politesse1">  Introduisez votre Nom s il vous plait </string>
+    <string name="politesse2">  Introduisez votre Prenom s il vous plait </string>
+    <string name="politesse3">  Introduisez votre date de naissance s il vous plait </string>
+    <string name="politesse4">  Introduisez votre ville de naissance s il vous plait </string>
+    <string name="validate">  Validar </string>
+    <string name="validate1"> {{this.}}  </string>
+
+
+    <!-- menu -->
+    <string name="textm1"> Reset </string>
+    <string name="textm2"> Accion 2 </string>
+    <string name="textm3"> Accion 3 </string>
+
+    <!-- spinner -->
+    <string name="departements"> Choose a departements </string>
+    <string-array name="departements">
+        <item> Cotes dArmor </item>
+        <item> Finistere </item>
+        <item> Ille et Villaine </item>
+        <item> Morbihan </item>
+    </string-array>
+
+</resources>
