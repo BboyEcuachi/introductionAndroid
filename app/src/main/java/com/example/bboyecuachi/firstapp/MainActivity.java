@@ -1,7 +1,8 @@
 package com.example.bboyecuachi.firstapp;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
@@ -14,23 +15,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.content.SharedPreferences;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
     public int count;
     private SharedPreferences share;
 
+    public final static String EXTRA_MESSAGE = "com.example.bboyecuachi.firstapp";
+
     /* este metodo guardara un valor int en "memoria" */
-    public SharedPreferences.Editor shareEditInt(String key , int value){
+    public SharedPreferences.Editor shareEditInt(String key, int value) {
         return this.share.edit().putInt(key, value);
     }
-    public SharedPreferences.Editor shareEditString(String key, String value){
+
+    public SharedPreferences.Editor shareEditString(String key, String value) {
         return this.share.edit().putString(key, value);
     }
 
@@ -45,47 +44,37 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             this.count = savedInstanceState.getInt("count");
             Log.d("debug", "se recupero algo: " + this.count);
+        } else {
+            this.count = this.share.getInt("count", 0); // se setea en cero si no existe aun
+            String prenom1 = this.share.getString("prenom", "");
+            String nom1 = this.share.getString("nom", "");
+            String date_de_naissance1 = this.share.getString("date_de_naissance", "");
+            String ville_de_naissance1 = this.share.getString("ville_de_naissance", "");
+            String numero1 = this.share.getString("numero", "");
+
+            EditText prenom = findViewById(R.id.PRENOM2);
+            EditText nom = findViewById(R.id.NOM2);
+            EditText date_de_naissance = findViewById(R.id.DATE2);
+            EditText ville_de_naissance = findViewById(R.id.VILLE2);
+            EditText numero = findViewById(R.id.numero);
+
+            prenom.setText(prenom1);
+            nom.setText(nom1);
+            date_de_naissance.setText(date_de_naissance1);
+            ville_de_naissance.setText(ville_de_naissance1);
+            numero.setText(numero1);
+
+            if (this.count != 0)
+                Log.d("debug", "valor count recuperado: " + this.count);
+
+            TextView txt = (TextView) findViewById(R.id.un_texto);
+            txt.setText(" " + this.count + " ");
         }
 
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Log.d("debug", "Se toca la app " + MainActivity.this.count);
-            MainActivity.this.count += 1;
-        }
-        return super.onTouchEvent(event);
     }
 
     @Override
     protected void onStart() {
-        this.count = this.share.getInt("count", 0); // se setea en cero si no existe aun
-        String prenom1 = this.share.getString("prenom", "");
-        String nom1 = this.share.getString("nom", "");
-        String date_de_naissance1 = this.share.getString("date_de_naissance", "");
-        String ville_de_naissance1 = this.share.getString("ville_de_naissance", "");
-        String numero1 = this.share.getString("numero", "");
-
-
-        EditText prenom = findViewById(R.id.PRENOM2);
-        EditText nom = findViewById(R.id.NOM2);
-        EditText date_de_naissance = findViewById(R.id.DATE2);
-        EditText ville_de_naissance = findViewById(R.id.VILLE2);
-        EditText numero = findViewById(R.id.numero);
-
-        prenom.setText(prenom1);
-        nom.setText(nom1);
-        date_de_naissance.setText(date_de_naissance1);
-        ville_de_naissance.setText(ville_de_naissance1);
-        numero.setText(numero1);
-
-        if (this.count != 0)
-            Log.d("debug", "valor count recuperado: " + this.count);
-
-        TextView txt = (TextView)findViewById(R.id.un_texto);
-        txt.setText(" " + this.count + " ");
-
         Log.i("Lifecycle", "APP onStart");
         super.onStart();
     }
@@ -142,17 +131,22 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Lifecycle", "APP onDestroy");
     }
 
-    /*
-    public void validateAction (View v){
-        EditText Prenom = findViewById(R.id.PRENOM2);
-        EditText Nom = findViewById(R.id.NOM2);
-        EditText Date_de_naissance = findViewById(R.id.DATE2);
-        EditText Ville_de_naissance = findViewById(R.id.VILLE2);
-        String textToShow = new String (Prenom.getText().toString() + "\n" +Nom.getText().toString() + "\n" + Date_de_naissance.getText().toString() + "\n" + Ville_de_naissance.getText().toString());
-        Toast.makeText(getApplicationContext(), textToShow, Toast.LENGTH_LONG).show();
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d("debug", "Se crea el menu");
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
-    */
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.d("debug", "Se toca la app " + MainActivity.this.count);
+            MainActivity.this.count += 1;
+        }
+        return super.onTouchEvent(event);
+    }
+
     public void validateAction(View v) {
         EditText prenom = findViewById(R.id.PRENOM2);
         EditText nom = findViewById(R.id.NOM2);
@@ -176,13 +170,6 @@ public class MainActivity extends AppCompatActivity {
         s.show();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d("debug", "Se crea el menu");
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
     public boolean resetAction(MenuItem item) {
         Log.d("debug", "opcion 1");
 
@@ -202,16 +189,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addNumero(View v) {
-        LinearLayout li=new LinearLayout(this);
-        EditText et=new EditText(this);
-        Button b=new Button(this);
+        LinearLayout li = new LinearLayout(this);
+        EditText et = new EditText(this);
+        Button b = new Button(this);
 
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                int pos=(Integer) v.getTag();
+                int pos = (Integer) v.getTag();
 
             }
         });
@@ -229,8 +216,62 @@ public class MainActivity extends AppCompatActivity {
     public void clickAndroid(View v) {
         MainActivity.this.count += 1;
         Log.d("debug", "cuando se pega en la cara " + MainActivity.this.count);
-        TextView txt = (TextView)findViewById(R.id.un_texto);
+        TextView txt = (TextView) findViewById(R.id.un_texto);
         txt.setText(" " + this.count + " ");
     }
+
+    /* TP3 */
+    public void questionAction(MenuItem item) {
+        Intent intentQuestion = new Intent(this, QuestionActivity.class);
+        intentQuestion.putExtra(EXTRA_MESSAGE, "Enter your qestion");
+        startActivityForResult(intentQuestion, 1010);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("debug", "requestCode: " + requestCode + " ; resultCode: " + resultCode);
+
+        Log.d("debug", "get extra MainActivity:" + data.getStringExtra("chao"));
+
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("Lifecycle", "APP onActivityResult");
+    }
+
+    public void wiki(MenuItem item) {
+        EditText ville = findViewById(R.id.VILLE2);
+
+        String villeStr = ville.getText().toString();
+
+        if (villeStr.isEmpty()) {
+            Snackbar s;
+            s = Snackbar.make(findViewById(R.id.Principal_Layout), "Escriba un lugar de nacimiento", Snackbar.LENGTH_LONG);
+            s.show();
+        } else {
+            Intent intentQuestion = new Intent();
+            intentQuestion.setAction(Intent.ACTION_VIEW);
+
+            intentQuestion.setData(Uri.parse("http://fr.wikipedia.org/?search=" + villeStr));
+            startActivity(intentQuestion);
+        }
+    }
+
+    public void share(MenuItem item) {
+        EditText ville = findViewById(R.id.VILLE2);
+
+        String villeStr = ville.getText().toString();
+
+        if (villeStr.isEmpty()) {
+            Snackbar s;
+            s = Snackbar.make(findViewById(R.id.Principal_Layout), "Escriba un lugar de nacimiento", Snackbar.LENGTH_LONG);
+            s.show();
+        } else {
+            Intent intentQuestion = new Intent();
+            intentQuestion.setAction(Intent.ACTION_SEND);
+            intentQuestion.putExtra(Intent.EXTRA_TEXT, villeStr);
+            intentQuestion.setType("text/plain");
+            startActivity(intentQuestion);
+        }
+    }
+
 }
 

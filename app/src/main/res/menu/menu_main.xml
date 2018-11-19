@@ -4,5 +4,17 @@
         android:onClick="resetAction"
         android:title="@string/textm1">
     </item>
+    <item android:id="@+id/questionAction"
+        android:onClick="questionAction"
+        android:title="@string/textm2">
+    </item>
+    <item android:id="@+id/wiki"
+        android:onClick="wiki"
+        android:title="@string/textm3">
+    </item>
+    <item android:id="@+id/share"
+        android:onClick="share"
+        android:title="@string/textm4">
+    </item>
 
 </menu>

@@ -13,8 +13,9 @@
 
     <!-- menu -->
     <string name="textm1"> Reset </string>
-    <string name="textm2"> Accion 2 </string>
-    <string name="textm3"> Accion 3 </string>
+    <string name="textm2"> Question </string>
+    <string name="textm3"> Ville de naissance (Wiki) </string>
+    <string name="textm4"> Share ville </string>
 
     <!-- spinner -->
     <string name="departements"> Choose a departements </string>
@@ -24,5 +25,7 @@
         <item> Ille et Villaine </item>
         <item> Morbihan </item>
     </string-array>
+    <string name="title_activity_question">QuestionActivity</string>
+    <string name="title_activity_reponse">ReponseActivity</string>
 
 </resources>
