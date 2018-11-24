@@ -41,7 +41,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
         super.onDestroy();
         Log.i("Lifecycle", "Activity Question onDestroy");
     }

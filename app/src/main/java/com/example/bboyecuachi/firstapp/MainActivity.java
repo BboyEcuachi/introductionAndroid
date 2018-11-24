@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
+import java.io.Serializable;
+
 
 public class MainActivity extends AppCompatActivity {
     public int count;
@@ -264,7 +266,8 @@ public class MainActivity extends AppCompatActivity {
             Snackbar s;
             s = Snackbar.make(findViewById(R.id.Principal_Layout), "Escriba un lugar de nacimiento", Snackbar.LENGTH_LONG);
             s.show();
-        } else {
+        }
+        else {
             Intent intentQuestion = new Intent();
             intentQuestion.setAction(Intent.ACTION_SEND);
             intentQuestion.putExtra(Intent.EXTRA_TEXT, villeStr);
@@ -274,4 +277,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
 
