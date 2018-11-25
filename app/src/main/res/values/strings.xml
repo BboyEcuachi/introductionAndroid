@@ -10,6 +10,13 @@
     <string name="validate">  Validar </string>
     <string name="validate1"> {{this.}}  </string>
 
+    <!-- Display Activity -->
+    <string name="displayNom"> Votre Nom est </string>
+    <string name="displaypreNom"> Votre Prènom est </string>
+    <string name="displayVille"> Votre Ville de naissance est </string>
+    <string name="displayDate"> Votre Date de naissance est </string>
+    <string name="displayNumero"> Votre Numero est </string>
+
 
     <!-- menu -->
     <string name="textm1"> Reset </string>
@@ -27,5 +34,6 @@
     </string-array>
     <string name="title_activity_question">QuestionActivity</string>
     <string name="title_activity_reponse">ReponseActivity</string>
+    <string name="title_activity_display">DisplayActivity</string>
 
 </resources>

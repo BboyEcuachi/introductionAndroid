@@ -1,5 +1,6 @@
 package com.example.bboyecuachi.firstapp;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -7,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
 import android.util.*;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -21,9 +24,14 @@ import java.io.Serializable;
 
 
 public class MainActivity extends AppCompatActivity {
+   /*----------------------------- VARIABLES ---------------------------------------------*/
     public int count;
+    public String numbers;
     private SharedPreferences share;
+    LinearLayout linearLay;
 
+
+    /* -------------------------------FIN VARIABLES --------------------------------------------*/
     public final static String EXTRA_MESSAGE = "com.example.bboyecuachi.firstapp";
 
     /* este metodo guardara un valor int en "memoria" */
@@ -40,31 +48,31 @@ public class MainActivity extends AppCompatActivity {
         Log.i("Lifecycle", "Creacion de la APP");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        linearLay = (LinearLayout) findViewById(R.id.container);
+
 
         this.share = getSharedPreferences("XML", Context.MODE_PRIVATE);
 
         if (savedInstanceState != null) {
             this.count = savedInstanceState.getInt("count");
-            Log.d("debug", "se recupero algo: " + this.count);
-        } else {
+            this.numbers = savedInstanceState.getString("Numeros");
+            Log.d("debug", "se recupero algo: " + this.count + "\n" +this.numbers);
+        }
+        else {
             this.count = this.share.getInt("count", 0); // se setea en cero si no existe aun
             String prenom1 = this.share.getString("prenom", "");
             String nom1 = this.share.getString("nom", "");
             String date_de_naissance1 = this.share.getString("date_de_naissance", "");
             String ville_de_naissance1 = this.share.getString("ville_de_naissance", "");
-            String numero1 = this.share.getString("numero", "");
 
             EditText prenom = findViewById(R.id.PRENOM2);
             EditText nom = findViewById(R.id.NOM2);
             EditText date_de_naissance = findViewById(R.id.DATE2);
             EditText ville_de_naissance = findViewById(R.id.VILLE2);
-            EditText numero = findViewById(R.id.numero);
-
             prenom.setText(prenom1);
             nom.setText(nom1);
             date_de_naissance.setText(date_de_naissance1);
             ville_de_naissance.setText(ville_de_naissance1);
-            numero.setText(numero1);
 
             if (this.count != 0)
                 Log.d("debug", "valor count recuperado: " + this.count);
@@ -85,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         Log.i("Lifecycle", "APP onSave instances");
         outState.putInt("count", this.count);
+        outState.putString("Numeros", this.numbers);
         super.onSaveInstanceState(outState);
     }
 
@@ -92,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         Log.i("Lifecycle", "APP onRestore instances");
         this.count = savedInstanceState.getInt("count");
+        this.numbers = savedInstanceState.getString("Numeros");
+        Log.d("debug", "se recupero algo: " + this.count + "\n" +this.numbers);
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -109,22 +120,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
-        this.shareEditInt("count", this.count).apply();
 
         EditText prenom = findViewById(R.id.PRENOM2);
         EditText nom = findViewById(R.id.NOM2);
         EditText date_de_naissance = findViewById(R.id.DATE2);
         EditText ville_de_naissance = findViewById(R.id.VILLE2);
-        EditText numero = findViewById(R.id.numero);
+        this.numbers = insert_tel();
+        Log.d("debug", "GUARDANDO NUMEROS: " + this.numbers);
 
+        this.shareEditInt("count", this.count).apply();
+        this.shareEditString("Numeros", this.numbers).apply();
         this.shareEditString("prenom", prenom.getText().toString()).apply();
         this.shareEditString("nom", nom.getText().toString()).apply();
         this.shareEditString("date_de_naissance", date_de_naissance.getText().toString()).apply();
         this.shareEditString("ville_de_naissance", ville_de_naissance.getText().toString()).apply();
-        this.shareEditString("numero", numero.getText().toString()).apply();
-
-        Log.i("Lifecycle", "APP onStop");
         super.onStop();
+        Log.i("Lifecycle", "APP onStop");
     }
 
     @Override
@@ -154,22 +165,28 @@ public class MainActivity extends AppCompatActivity {
         EditText nom = findViewById(R.id.NOM2);
         EditText date_de_naissance = findViewById(R.id.DATE2);
         EditText ville_de_naissance = findViewById(R.id.VILLE2);
-        EditText numero = findViewById(R.id.numero);
+        //EditText numero = findViewById(R.id.numero);
 
         this.shareEditString("prenom", prenom.getText().toString()).apply();
         this.shareEditString("nom", nom.getText().toString()).apply();
         this.shareEditString("date_de_naissance", date_de_naissance.getText().toString()).apply();
         this.shareEditString("ville_de_naissance", ville_de_naissance.getText().toString()).apply();
-        this.shareEditString("numero", numero.getText().toString()).apply();
+        //this.shareEditString("numero", numero.getText().toString()).apply();
 
         String textToShow = new String(prenom.getText().toString() + " - " +
                 nom.getText().toString() + " - " +
                 date_de_naissance.getText().toString() + " - " +
-                ville_de_naissance.getText().toString() + " - " +
-                numero.getText().toString());
+                ville_de_naissance.getText().toString());
         Snackbar s;
         s = Snackbar.make(findViewById(R.id.Principal_Layout), textToShow, Snackbar.LENGTH_LONG);
         s.show();
+
+        Intent displayActivity = new Intent(this,DisplayActivity.class);
+        //int numero_int = Integer.parseInt(numero.getText().toString());
+        User user = new User(nom.getText().toString(),prenom.getText().toString(), ville_de_naissance.getText().toString(), date_de_naissance.getText().toString());
+        displayActivity.putExtra("User", user);
+        startActivity(displayActivity);
+
     }
 
     public boolean resetAction(MenuItem item) {
@@ -179,42 +196,50 @@ public class MainActivity extends AppCompatActivity {
         EditText nom = findViewById(R.id.NOM2);
         EditText date_de_naissance = findViewById(R.id.DATE2);
         EditText ville_de_naissance = findViewById(R.id.VILLE2);
-        EditText numero = findViewById(R.id.numero);
 
         prenom.setText("");
         nom.setText("");
         date_de_naissance.setText("");
         ville_de_naissance.setText("");
-        numero.setText("");
 
         return true;
     }
 
-    public void addNumero(View v) {
-        LinearLayout li = new LinearLayout(this);
-        EditText et = new EditText(this);
-        Button b = new Button(this);
+/* ------------------------------ ADHESION DE TELEFONO ------------------------------------------*/
+    public String insert_tel() {
+        int childCount = linearLay.getChildCount();
+        String tel = "";
+        for(int c=0; c<childCount; c++){
+            View childView = linearLay.getChildAt(c);
+            EditText textIn = (EditText) (childView.findViewById(R.id.textin));
+            if(!textIn.getText().toString().isEmpty())
+                tel += textIn.getText().toString() +"/";
 
-        b.setOnClickListener(new View.OnClickListener() {
+        }
+        return tel;
+    }
+
+    public void add_tel(View v) {
+        LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View addView = layoutInflater.inflate(R.layout.list_numero, null);
+        Button buttonRemove = (Button)addView.findViewById(R.id.button_delete);
+        buttonRemove.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
 
-                int pos = (Integer) v.getTag();
+                ((LinearLayout)addView.getParent()).removeView(addView);
 
-            }
-        });
+            }});
 
-    }
 
-    public void removeNumero(View v) {
-        EditText numero = findViewById(R.id.numero);
-        numero.setVisibility(View.INVISIBLE);
-        Log.d("debug", "" + View.INVISIBLE);
+        linearLay.addView(addView, 0);
+        LayoutTransition transition = new LayoutTransition();
+        linearLay.setLayoutTransition(transition);
     }
 
 
-    /* TP2 */
+    /*-------------------------------- TP2 ---------------------------------------------------------*/
     public void clickAndroid(View v) {
         MainActivity.this.count += 1;
         Log.d("debug", "cuando se pega en la cara " + MainActivity.this.count);

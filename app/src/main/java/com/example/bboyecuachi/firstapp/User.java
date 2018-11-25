@@ -2,6 +2,7 @@ package com.example.bboyecuachi.firstapp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.EditText;
 
 public class User implements Parcelable {
     int numero;
@@ -9,15 +10,15 @@ public class User implements Parcelable {
     String preNom;
     String ville;
     String date;
-    /*
-    public User(int numero, String nom, String preNom, String ville, String date){
+
+    public User(String nom, String preNom, String ville, String date){
         this.numero = numero;
         this.nom = nom;
         this.preNom = preNom;
         this.ville = ville;
         this.date = date;
     }
-    */
+
     @Override
     public int describeContents() {
         return 0;
