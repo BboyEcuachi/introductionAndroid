@@ -35,5 +35,6 @@
     <string name="title_activity_question">QuestionActivity</string>
     <string name="title_activity_reponse">ReponseActivity</string>
     <string name="title_activity_display">DisplayActivity</string>
+    <string name="title_activity_date">dateActivity</string>
 
 </resources>

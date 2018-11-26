@@ -2,17 +2,16 @@ package com.example.bboyecuachi.firstapp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.EditText;
 
 public class User implements Parcelable {
-    int numero;
+    String numero;
     String nom;
     String preNom;
     String ville;
     String date;
 
-    public User(String nom, String preNom, String ville, String date){
-        this.numero = numero;
+    public User(String nom, String preNom, String ville, String date, String numeros){
+        this.numero = numeros;
         this.nom = nom;
         this.preNom = preNom;
         this.ville = ville;
@@ -26,7 +25,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(this.numero);
+        out.writeString(this.numero);
         out.writeString(this.nom);
         out.writeString(this.preNom);
         out.writeString(this.ville);
@@ -44,7 +43,7 @@ public class User implements Parcelable {
     };
 
     private User(Parcel in) {
-        this.numero = in.readInt();
+        this.numero = in.readString();
         this.nom = in.readString();
         this.preNom = in.readString();
         this.ville = in.readString();

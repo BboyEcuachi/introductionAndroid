@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         linearLay = (LinearLayout) findViewById(R.id.container);
 
-
         this.share = getSharedPreferences("XML", Context.MODE_PRIVATE);
 
         if (savedInstanceState != null) {
@@ -134,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         this.shareEditString("nom", nom.getText().toString()).apply();
         this.shareEditString("date_de_naissance", date_de_naissance.getText().toString()).apply();
         this.shareEditString("ville_de_naissance", ville_de_naissance.getText().toString()).apply();
+
         super.onStop();
         Log.i("Lifecycle", "APP onStop");
     }
@@ -165,13 +165,7 @@ public class MainActivity extends AppCompatActivity {
         EditText nom = findViewById(R.id.NOM2);
         EditText date_de_naissance = findViewById(R.id.DATE2);
         EditText ville_de_naissance = findViewById(R.id.VILLE2);
-        //EditText numero = findViewById(R.id.numero);
-
-        this.shareEditString("prenom", prenom.getText().toString()).apply();
-        this.shareEditString("nom", nom.getText().toString()).apply();
-        this.shareEditString("date_de_naissance", date_de_naissance.getText().toString()).apply();
-        this.shareEditString("ville_de_naissance", ville_de_naissance.getText().toString()).apply();
-        //this.shareEditString("numero", numero.getText().toString()).apply();
+        this.numbers = insert_tel();
 
         String textToShow = new String(prenom.getText().toString() + " - " +
                 nom.getText().toString() + " - " +
@@ -182,8 +176,7 @@ public class MainActivity extends AppCompatActivity {
         s.show();
 
         Intent displayActivity = new Intent(this,DisplayActivity.class);
-        //int numero_int = Integer.parseInt(numero.getText().toString());
-        User user = new User(nom.getText().toString(),prenom.getText().toString(), ville_de_naissance.getText().toString(), date_de_naissance.getText().toString());
+        User user = new User(nom.getText().toString(), prenom.getText().toString(), ville_de_naissance.getText().toString(), date_de_naissance.getText().toString(), this.numbers);
         displayActivity.putExtra("User", user);
         startActivity(displayActivity);
 
@@ -262,6 +255,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
         Log.i("Lifecycle", "APP onActivityResult");
+
+        if (requestCode == 1){}
+
     }
 
     public void wiki(MenuItem item) {
@@ -299,6 +295,18 @@ public class MainActivity extends AppCompatActivity {
             intentQuestion.setType("text/plain");
             startActivity(intentQuestion);
         }
+    }
+
+    public void add_fechas(View v){
+        Intent intentDate = new Intent();
+        intentDate.setAction(Intent.ACTION_PICK);
+
+        EditText date = findViewById(R.id.DATE2);
+        String fecha = date.getText().toString();
+
+        intentDate.putExtra("fecha", fecha);
+        startActivityForResult(intentDate, 1);
+
     }
 
 }

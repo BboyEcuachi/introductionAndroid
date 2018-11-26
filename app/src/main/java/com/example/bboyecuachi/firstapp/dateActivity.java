@@ -8,29 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 
-public class DisplayActivity extends AppCompatActivity {
+public class dateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display);
+        setContentView(R.layout.activity_date);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent displayActivity = getIntent();
-        User user = (User)displayActivity.getParcelableExtra("User");
-        Log.d("debug", "RECUPERANDO ACTIVITY" + "\n" + user.numero + "\n" + user.nom + "\n" + user.preNom +"\n" + user.date +"\n"+ user.ville);
-        EditText userNom = (EditText)findViewById(R.id.userNom);
-        userNom.setText(user.nom);
-        EditText userpreNom = (EditText)findViewById(R.id.userpreNom);
-        userpreNom.setText(user.preNom);
-        EditText userVille = (EditText)findViewById(R.id.userVille);
-        userVille.setText(user.ville);
-        EditText userDate = (EditText)findViewById(R.id.userDate);
-        userDate.setText(user.date);
-        EditText userNumero = (EditText)findViewById(R.id.userNumero);
-        userNumero.setText("" + (user.numero));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +27,26 @@ public class DisplayActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Intent intentDate = getIntent();
+        String fecha = intentDate.getStringExtra("fecha");
+
+        TextView f1 = (TextView)findViewById(R.id.f1);
+        TextView f2 = (TextView)findViewById(R.id.f2);
+        TextView f3 = (TextView)findViewById(R.id.f3);
+
+        f1.setText(fecha.split("/")[0]);
+        f2.setText(fecha.split("/")[1]);
+        f3.setText(fecha.split("/")[2]);
+
+    }
+
+    public void b1(View v){
+
+
+    }
+    public void b2(View v){
+
     }
 
 }

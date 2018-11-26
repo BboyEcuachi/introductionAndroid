@@ -10,7 +10,9 @@
         android:id="@+id/Principal_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -23,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/politesse1" />
         </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/politesse2" />
         </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,14 +73,23 @@
                 android:layout_height="match_parent"
                 android:text="@string/politesse3" />
         </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/fechas_extras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="add_fechas"
+                android:text="send Date" />
+
             <EditText
                 android:id="@+id/DATE2"
-                android:layout_width="match_parent"
+                android:layout_width="185dp"
                 android:layout_height="wrap_content"
                 android:hint="Date de naissance" />
         </LinearLayout>
@@ -92,6 +105,7 @@
                 android:layout_height="match_parent"
                 android:text="@string/politesse4" />
         </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,9 +113,10 @@
 
             <EditText
                 android:id="@+id/VILLE2"
-                android:layout_width="match_parent"
+                android:layout_width="183dp"
                 android:layout_height="wrap_content"
                 android:hint="Ville de naissance" />
+
         </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -114,6 +129,7 @@
                 android:layout_height="match_parent"
                 android:text="@string/departements" />
         </LinearLayout>
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -138,17 +154,17 @@
                 android:id="@+id/button_add"
                 android:layout_width="34dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.36"
                 android:onClick="add_tel"
-                android:text="Add Telephone"
-                android:layout_weight="0.36" />
+                android:text="Add Telephone" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
 
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
