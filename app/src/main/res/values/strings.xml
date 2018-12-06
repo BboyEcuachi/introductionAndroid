@@ -1,40 +1,5 @@
 <resources>
+    <string name="app_name">FragmentsApp</string>
 
-    <string name="app_name"> Travail Pratique Nº1 </string>
-
-    <!-- Variables -->
-    <string name="politesse1">  Introduisez votre Nom s il vous plait </string>
-    <string name="politesse2">  Introduisez votre Prenom s il vous plait </string>
-    <string name="politesse3">  Introduisez votre date de naissance s il vous plait </string>
-    <string name="politesse4">  Introduisez votre ville de naissance s il vous plait </string>
-    <string name="validate">  Validar </string>
-    <string name="validate1"> {{this.}}  </string>
-
-    <!-- Display Activity -->
-    <string name="displayNom"> Votre Nom est </string>
-    <string name="displaypreNom"> Votre Prènom est </string>
-    <string name="displayVille"> Votre Ville de naissance est </string>
-    <string name="displayDate"> Votre Date de naissance est </string>
-    <string name="displayNumero"> Votre Numero est </string>
-
-
-    <!-- menu -->
-    <string name="textm1"> Reset </string>
-    <string name="textm2"> Question </string>
-    <string name="textm3"> Ville de naissance (Wiki) </string>
-    <string name="textm4"> Share ville </string>
-
-    <!-- spinner -->
-    <string name="departements"> Choose a departements </string>
-    <string-array name="departements">
-        <item> Cotes dArmor </item>
-        <item> Finistere </item>
-        <item> Ille et Villaine </item>
-        <item> Morbihan </item>
-    </string-array>
-    <string name="title_activity_question">QuestionActivity</string>
-    <string name="title_activity_reponse">ReponseActivity</string>
-    <string name="title_activity_display">DisplayActivity</string>
-    <string name="title_activity_date">dateActivity</string>
-
+    <string name="testFragment"> Prenom </string>
 </resources>

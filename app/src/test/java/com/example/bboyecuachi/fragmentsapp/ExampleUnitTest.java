@@ -1,4 +1,4 @@
-package com.example.bboyecuachi.firstapp;
+package com.example.bboyecuachi.fragmentsapp;
 
 import org.junit.Test;
 
