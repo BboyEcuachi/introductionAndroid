@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/MAP_TYPE_NORMAL"
+        android:title="@string/MAP_TYPE_NORMAL" />
+    <item android:id="@+id/MAP_TYPE_HYBRID"
+        android:title="@string/MAP_TYPE_HYBRID" />
+    <item android:id="@+id/MAP_TYPE_SATELLITE"
+        android:title="@string/MAP_TYPE_SATELLITE" />
+
+</menu>

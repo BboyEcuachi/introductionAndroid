@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Google_Maps_Project</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="MAP_TYPE_NORMAL">Map type normal</string>
+    <string name="MAP_TYPE_HYBRID">Map type hybrid</string>
+    <string name="MAP_TYPE_SATELLITE">Map type satellite</string>
+</resources>
